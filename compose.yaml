@@ -1,0 +1,21 @@
+services:
+  container:
+    build:
+      context: ./frontend/container
+      dockerfile: ./docker/Dockerfile.dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/container/
+    ports:
+      - "3000:5173"
+  authentication:
+    build:
+      context: ./frontend/authentication
+      dockerfile: ./docker/Dockerfile.dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/authentication/
+    ports:
+      - "3001:5173"
