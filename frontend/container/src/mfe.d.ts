@@ -1,4 +1,3 @@
-declare module "authentication/App" {
-  const App: React.FC<{}>;
-  export default App;
+declare module "authentication/Routes" {
+  export const federationRoutes: import("react-router-dom").RouteObject[];
 }

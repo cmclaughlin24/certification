@@ -10,7 +10,7 @@ export default defineConfig({
       name: "authentication",
       filename: "remoteEntry.js",
       exposes: {
-        "./App": "./src/App",
+        "./Routes": "./src/Routes",
       },
       shared: ["react", "react-dom"],
     }),
