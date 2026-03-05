@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-export default function RootLayout() {
+const RootLayout: React.FC = () => {
   return (
     <>
       <header>Application Header & Navigation Items</header>
@@ -11,3 +11,5 @@ export default function RootLayout() {
     </>
   );
 }
+
+export default RootLayout;
