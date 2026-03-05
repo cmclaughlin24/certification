@@ -1,6 +1,6 @@
 <div align="center">
 
-# Certification
+# Identity Access Management
 
 ##### A Next Generation Proof of Concept
 
