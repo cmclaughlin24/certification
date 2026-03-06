@@ -9,6 +9,9 @@ services:
           path: ./frontend/container/
     ports:
       - "3000:5173"
+    environment:
+      - AUTHENTICATION_HOST=http://authentication:5173
+      - CERTIFICATION_HOST=http://certification:5173
   authentication:
     build:
       context: ./frontend/authentication

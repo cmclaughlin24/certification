@@ -9,10 +9,22 @@ export default defineConfig({
     federation({
       name: "container",
       remotes: {
-        authentication: `${process.env.VITE_AUTHENTICATION_HOST || "http://localhost:3001"}/assets/remoteEntry.js`,
-        certification: `${process.env.VITE_CERTIFICATION_HOST || "http://localhost:3002"}/assets/remoteEntry.js`,
+        authentication: "/authentication-ui/assets/remoteEntry.js",
+        certification: "/certification-ui/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom"],
     }),
   ],
+  server: {
+    proxy: {
+      "/authentication-ui": {
+        target: process.env.AUTHENTICATION_HOST || "http://localhost:3001",
+        rewrite: (path) => path.replace(/^\/authentication-ui/, ""),
+      },
+      "/certification-ui": {
+        target: process.env.CERTIFICATION_HOST || "http://localhost:3002",
+        rewrite: (path) => path.replace(/^\/certification-ui/, ""),
+      },
+    },
+  },
 });
