@@ -9,8 +9,8 @@ export default defineConfig({
     federation({
       name: "container",
       remotes: {
-        authentication: "http:localhost:3001/assets/remoteEntry.js",
-        certification: "http://localhost:3002/assets/remoteEntry.js",
+        authentication: `${process.env.VITE_AUTHENTICATION_HOST || "http://localhost:3001"}/assets/remoteEntry.js`,
+        certification: `${process.env.VITE_CERTIFICATION_HOST || "http://localhost:3002"}/assets/remoteEntry.js`,
       },
       shared: ["react", "react-dom"],
     }),
