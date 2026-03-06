@@ -1,22 +1,23 @@
-import { ZoneContextManager } from '@opentelemetry/context-zone';
-import { registerInstrumentations } from '@opentelemetry/instrumentation';
-import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { resourceFromAttributes } from '@opentelemetry/resources';
-import { SEMRESATTRS_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
+import { ZoneContextManager } from "@opentelemetry/context-zone";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { WebTracerProvider } from "@opentelemetry/sdk-trace-web";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { resourceFromAttributes } from "@opentelemetry/resources";
+import { SEMRESATTRS_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
+import { getWebAutoInstrumentations } from "@opentelemetry/auto-instrumentations-web";
 
-const OTEL_ENDPOINT = 'http://localhost:4318/v1/traces';
+const OTEL_ENDPOINT = "/otlp";
+const OTEL_SERVICE_NAME = "container";
 
 export function initTelemetry() {
   const exporter = new OTLPTraceExporter({
-    url: OTEL_ENDPOINT,
+    url: `${OTEL_ENDPOINT}/v1/traces`,
   });
 
   const provider = new WebTracerProvider({
     resource: resourceFromAttributes({
-      [SEMRESATTRS_SERVICE_NAME]: 'container',
+      [SEMRESATTRS_SERVICE_NAME]: OTEL_SERVICE_NAME,
     }),
     spanProcessors: [new BatchSpanProcessor(exporter)],
   });
@@ -26,8 +27,6 @@ export function initTelemetry() {
   });
 
   registerInstrumentations({
-    instrumentations: [
-      getWebAutoInstrumentations(),
-    ],
+    instrumentations: [getWebAutoInstrumentations()],
   });
 }

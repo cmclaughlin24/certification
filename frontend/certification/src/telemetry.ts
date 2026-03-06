@@ -7,16 +7,17 @@ import { resourceFromAttributes } from '@opentelemetry/resources';
 import { SEMRESATTRS_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 
-const OTEL_ENDPOINT = 'http://localhost:4318/v1/traces';
+const OTEL_ENDPOINT = "/otlp";
+const OTEL_SERVICE_NAME = "certification";
 
 export function initTelemetry() {
   const exporter = new OTLPTraceExporter({
-    url: OTEL_ENDPOINT,
+    url: `${OTEL_ENDPOINT}/v1/traces`,
   });
 
   const provider = new WebTracerProvider({
     resource: resourceFromAttributes({
-      [SEMRESATTRS_SERVICE_NAME]: 'certification',
+      [SEMRESATTRS_SERVICE_NAME]: OTEL_SERVICE_NAME,
     }),
     spanProcessors: [new BatchSpanProcessor(exporter)],
   });
