@@ -5,5 +5,5 @@
   max-height: 4.5rem;
   padding: 1.25rem 2.5rem;
   background-color: var(--primary-red);
-  border-bottom: 4px var(--secondary-yellow) solid;
+  border-bottom: 4px var(--accent-yellow) solid;
 }

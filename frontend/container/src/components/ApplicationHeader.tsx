@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom";
 import Header from "./Header";
 import { navItems } from "../nav-items";
 import logo from "../assets/wells-fargo-logo.webp";
+import { useState } from "react";
 
 const ApplicationHeader: React.FC = function () {
+  const [isAuthenticated, _setIsAuthenticated] = useState(false);
+
   return (
     <Header>
       <Header.Branding>
@@ -13,7 +16,10 @@ const ApplicationHeader: React.FC = function () {
       </Header.Branding>
       <Header.MainNavigation items={navItems} />
       <Header.Actions>
-        <NavLink to="/authentication/login">Login</NavLink>
+        {!isAuthenticated && (
+          <NavLink to="/authentication/login">Login</NavLink>
+        )}
+        {isAuthenticated && <p>Actions</p>}
       </Header.Actions>
     </Header>
   );

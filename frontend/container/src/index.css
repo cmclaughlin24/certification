@@ -16,9 +16,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  box-sizing: border-box;
   --primary-red: #d71e28;
-  --secondary-yellow: #ffcd41;
+  --accent-yellow: #ffcd41;
 }
 
 a {
